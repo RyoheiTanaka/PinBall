@@ -32,7 +32,7 @@ public class FripperDirector : MonoBehaviour {
 			if(touch.phase == TouchPhase.Began) {
 				SetBeganAngle(touch.position);
 			} else if(touch.phase == TouchPhase.Canceled || touch.phase == TouchPhase.Ended) {
-				SeEndedAngle(touch.position);
+				SetEndedAngle(touch.rawPosition);
 			}
 		}
 	}
@@ -49,8 +49,8 @@ public class FripperDirector : MonoBehaviour {
 		}
 	}
 
-	public void SeEndedAngle(Vector2 position) {
-		if(position.x < this.width / 2) {
+	public void SetEndedAngle(Vector2 rawPosition) {
+		if(rawPosition.x < this.width / 2) {
 			JointSpring leftJointSpr = this.leftHingeJoint.spring;
 			leftJointSpr.targetPosition = this.defaultAngle;
 			this.leftHingeJoint.spring = leftJointSpr;
@@ -60,4 +60,5 @@ public class FripperDirector : MonoBehaviour {
 			this.rightHingeJoint.spring = rightJointSpr;
 		}
 	}
+
 }
